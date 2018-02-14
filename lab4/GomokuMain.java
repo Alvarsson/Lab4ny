@@ -11,6 +11,8 @@ public class GomokuMain {
 		}
 		try {
 			GomokuClient client = new GomokuClient(portNumber);
+		} catch (Exception e) {
+			bla bla bla
 		}
 		GomokuGameState gameState = new GomokuGameState(client);
 		GomokuGUI gui = new GomokuGUI();
