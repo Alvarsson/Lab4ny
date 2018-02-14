@@ -1,5 +1,7 @@
 package lab4;
 import lab4.client.*;
+import lab4.data.*;
+import lab4.gui.*;
 
 public class GomokuMain {
 	public static void main(String[] args) {
@@ -12,7 +14,7 @@ public class GomokuMain {
 		try {
 			GomokuClient client = new GomokuClient(portNumber);
 		} catch (Exception e) {
-			bla bla bla
+			
 		}
 		GomokuGameState gameState = new GomokuGameState(client);
 		GomokuGUI gui = new GomokuGUI();
