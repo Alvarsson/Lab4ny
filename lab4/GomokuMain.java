@@ -1,4 +1,4 @@
-package lab4;
+﻿package lab4;
 import lab4.client.*;
 import lab4.data.*;
 import lab4.gui.*;
@@ -18,6 +18,8 @@ public class GomokuMain {
 		}
 		GomokuGameState gameState = new GomokuGameState(client);
 		GomokuGUI gui = new GomokuGUI();
+
+//New comment
 		
 		
 		

@@ -140,7 +140,7 @@ public class GameGrid extends Observable{
 		}
 		return true;
 	}
-	private boolean checkDiagonal(int player) {
+	private boolean checkDiagonal(int player) { //Kolla efter diagonalt??
 		
 	}
 }
