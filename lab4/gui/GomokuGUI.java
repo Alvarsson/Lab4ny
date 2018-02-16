@@ -3,6 +3,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
@@ -47,9 +48,9 @@ public class GomokuGUI implements Observer{
 		gamestate.addObserver(this);
 		
 		JFrame frame = new JFrame("fishdix");
-		GamePanel gameGridPanel = new GamePanel();
-		gameGridPanel.addMouseListener(new MouseListener() {
-			public void mouseClicked(MouseEvent e) extends MouseAdapter {
+		GamePanel gameGridPanel = new GamePanel(this.gamestate.getGameGrid());
+		gameGridPanel.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
 				
 			}
 		});
@@ -58,7 +59,8 @@ public class GomokuGUI implements Observer{
 		JButton connectButton = new JButton("Connect");
 		connectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ConnectionWindow connected = new ConnectionWindow();
+				ConnectionWindow connected = new ConnectionWindow(client);
+				
 			}
 			
 		});
