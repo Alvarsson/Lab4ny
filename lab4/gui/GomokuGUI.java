@@ -12,6 +12,7 @@ import lab4.data.GameGrid;
 import lab4.data.GomokuGameState;
 
 
+
 /*
  * The GUI class
  */
@@ -20,6 +21,11 @@ public class GomokuGUI implements Observer{
 
 	private GomokuClient client;
 	private GomokuGameState gamestate;
+	private static GamePanel gameGridPanel;
+	private static JLabel messageLabel;
+	private static JButton connectButton;
+	private static JButton newGameButton;
+	private static JButton disconnectButton;
 	
 	/**
 	 * The constructor
@@ -102,7 +108,7 @@ public class GomokuGUI implements Observer{
 		if(arg0 == gamestate){
 			messageLabel.setText(gamestate.getMessageString());
 		}
-		this.repaint();
+
 		
 	}
 	
