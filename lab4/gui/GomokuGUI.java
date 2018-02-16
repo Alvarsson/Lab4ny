@@ -1,5 +1,9 @@
 package lab4.gui;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
@@ -44,10 +48,32 @@ public class GomokuGUI implements Observer{
 		
 		JFrame frame = new JFrame("fishdix");
 		GamePanel gameGridPanel = new GamePanel();
+		gameGridPanel.addMouseListener(new MouseListener() {
+			public void mouseClicked(MouseEvent e) extends MouseAdapter {
+				
+			}
+		});
+		
 		JLabel messageLabel = new JLabel("Welcome To Gomoku");
 		JButton connectButton = new JButton("Connect");
+		connectButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ConnectionWindow connected = new ConnectionWindow();
+			}
+			
+		});
 		JButton newGameButton = new JButton("New Game");
+		newGameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gamestate.newGame();
+			}
+		});
 		JButton disconnectButton = new JButton("Disconnect");
+		disconnectButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				gamestate.disconnect();
+			}
+		});
 		
 		Container contentPane = frame.getContentPane();
 		SpringLayout layout = new SpringLayout();
@@ -88,7 +114,6 @@ public class GomokuGUI implements Observer{
 		
 	}
 	
-	
 	public void update(Observable arg0, Object arg1) {
 		
 		// Update the buttons if the connection status has changed
@@ -111,5 +136,6 @@ public class GomokuGUI implements Observer{
 
 		
 	}
+	
 	
 }
