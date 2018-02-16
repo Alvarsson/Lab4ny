@@ -1,8 +1,10 @@
 package lab4.gui;
+import java.awt.Container;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import lab4.client.GomokuClient;
@@ -36,18 +38,41 @@ public class GomokuGUI implements Observer{
 		
 		JFrame frame = new JFrame("fishdix");
 		GamePanel gameGridPanel = new GamePanel();
-		JLabel messageLabel = new JLabel("make a move");
+		JLabel messageLabel = new JLabel("Welcome To Gomoku");
 		JButton connectButton = new JButton("Connect");
 		JButton newGameButton = new JButton("New Game");
 		JButton disconnectButton = new JButton("Disconnect");
-		JPanel pane = new JPanel();
 		
-		pane.add(gameGridPanel);
-		pane.add(messageLabel);
-		pane.add(connectButton);
-		pane.add(newGameButton);
-		pane.add(disconnectButton);
+		Container contentPane = frame.getContentPane();
+		SpringLayout layout = new SpringLayout();
 		
+		contentPane.setLayout(layout);
+		contentPane.add(messageLabel);
+		contentPane.add(connectButton);
+		contentPane.add(newGameButton);
+		contentPane.add(disconnectButton);
+		contentPane.add(gameGridPanel);
+		
+		layout.putConstraint(SpringLayout.WEST, contentPane, 1, SpringLayout.WEST, gameGridPanel);
+		layout.putConstraint(SpringLayout.NORTH, contentPane, 1, SpringLayout.NORTH, gameGridPanel);
+		
+		layout.putConstraint(SpringLayout.WEST, contentPane, 3, SpringLayout.WEST, connectButton);
+		layout.putConstraint(SpringLayout.NORTH, gameGridPanel, 3,SpringLayout.NORTH, connectButton);
+		layout.putConstraint(SpringLayout.WEST, connectButton, 3, SpringLayout.WEST, newGameButton);
+		layout.putConstraint(SpringLayout.WEST, newGameButton, 3, SpringLayout.WEST, disconnectButton);
+		
+		layout.putConstraint(SpringLayout.WEST, contentPane,3,SpringLayout.WEST, messageLabel);
+		layout.putConstraint(SpringLayout.NORTH, connectButton, 5, SpringLayout.NORTH, messageLabel);
+		
+		/*JPanel pane = new JPanel();
+		JPanel pane1 = new JPanel();
+		JPanel pane2 = new JPanel();
+		JPanel pane3 = new JPanel();
+		pane1.add(gameGridPanel);
+		pane2.add(connectButton);
+		pane2.add(newGameButton);
+		pane2.add(disconnectButton);
+		pane3.add(messageLabel);*/
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane();
@@ -77,6 +102,7 @@ public class GomokuGUI implements Observer{
 		if(arg0 == gamestate){
 			messageLabel.setText(gamestate.getMessageString());
 		}
+		this.repaint();
 		
 	}
 	

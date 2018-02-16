@@ -1,8 +1,7 @@
 package lab4.data;
 import javafx.util.*;
 import java.util.Observable;
-import java.util.ArrayList;
-import java.util.Arrays;
+
 
 /**
  * Represents the 2-d game grid
