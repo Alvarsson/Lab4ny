@@ -40,8 +40,7 @@ public class GomokuGUI implements Observer{
 	 * @param c   The client that is responsible for the communication
 	 */
 	public GomokuGUI(GomokuGameState g, GomokuClient c){
-		/*this.gamestate = g;
-		this.gamestate.addObserver(this);*/
+		
 		
 		this.client = c;
 		this.gamestate = g;

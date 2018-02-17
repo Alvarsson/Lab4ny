@@ -103,42 +103,71 @@ public class GameGrid extends Observable{
 		int rows = multiarray.length;
 		int cols = multiarray[0].length;
 		int count = 0;
-		while(count != INROW) {
-			for(int x = 0; x < rows; x++) {
-				for(int y = 0; y < cols; y++) {
-					if(multiarray[x][y] == player) {
-						count++;
-					} 
-					
-					if(multiarray[x][y] == EMPTY) {
-						count = 0;
-						
-					}
+		for(int x = 0; x < rows; x++) {
+			for(int y = 0; y < cols; y++) {
+				if(multiarray[x][y] == player) {
+					count++;
+				}
+				if(multiarray[x][y] == EMPTY) {
+					count = 0;
+				}
+				if(INROW == count) {
+					return true;
 				}
 			}
 		}
-		return true;
+		return false;
 	}
 	private boolean checkVertical(int player) {
 		int cols = multiarray[0].length;
 		int rows = multiarray.length;
 		int count = 0;
-		while(count != INROW) {
-			for(int y = 0; y < cols; y++) {
-				for(int x= 0; x < rows; x++) {
-					if(multiarray[x][y] == player) {
-						count++;
-					} 
-					if(multiarray[x][y] == EMPTY) {
-						count = 0;
-					}
+		for(int y = 0; y < cols; y++) {
+			for(int x= 0; x < rows; x++) {
+				if(multiarray[x][y] == player) {
+					count++;
+				} 
+				if(multiarray[x][y] == EMPTY) {
+					count = 0;
+				}
+				if(INROW == count) {
+					return true;
 				}
 			}
 		}
-		return true;
+		return false;
 	}
 	private boolean checkDiagonal(int player) { //Kolla efter diagonalt??
-		
+		int cols = multiarray[0].length;
+		int rows = multiarray.length;
+		int count = 0;
+		int dCountX, dCountY;
+		for(int x = 0; x < rows; x++) {
+			for(int y = 0; x < cols; y++) {
+				if(multiarray[x][y] == player) {
+					dCountX = x;
+					dCountY = y;
+					count = 1;
+					while(multiarray[dCountX+1][dCountY+1] == player) {
+						dCountX++;
+						dCountY++;
+						count++;
+					}
+					dCountX = x;
+					dCountY = y;
+					count = 1;
+					while(multiarray[dCountX+1][dCountY+1] == player) {
+						dCountX++;
+						dCountY--;
+						count++;
+					}	
+				}
+				if(INROW <= count) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
 	
