@@ -63,5 +63,8 @@ public class GamePanel extends JPanel implements Observer{
 		}
 		
 	}
+	public int getUnitSize() {
+		return UNIT_SIZE;
+	}
 	
 }

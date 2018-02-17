@@ -1,5 +1,7 @@
 package lab4.gui;
+import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -26,7 +28,7 @@ public class GomokuGUI implements Observer{
 
 	private GomokuClient client;
 	private GomokuGameState gamestate;
-	private static GamePanel gameGridPanel;
+	private GamePanel gameGridPanel;
 	private GameGrid gamegrid;
 	private static JLabel messageLabel;
 	private static JButton connectButton;
@@ -46,6 +48,7 @@ public class GomokuGUI implements Observer{
 		this.gamestate = g;
 		client.addObserver(this);
 		gamestate.addObserver(this);
+		gamegrid = gamestate.getGameGrid();
 		
 		JFrame frame = new JFrame("fishdix");
 		GamePanel gameGridPanel = new GamePanel(this.gamestate.getGameGrid());
@@ -77,41 +80,16 @@ public class GomokuGUI implements Observer{
 				gamestate.disconnect();
 			}
 		});
-		
-		Container contentPane = frame.getContentPane();
-		SpringLayout layout = new SpringLayout();
-		
-		contentPane.setLayout(layout);
-		contentPane.add(messageLabel);
-		contentPane.add(connectButton);
-		contentPane.add(newGameButton);
-		contentPane.add(disconnectButton);
-		contentPane.add(gameGridPanel);
-		//INGEN ANING OM DETTA BLIR KORREKT
-		
-		layout.putConstraint(SpringLayout.WEST, contentPane, 1, SpringLayout.WEST, gameGridPanel);
-		layout.putConstraint(SpringLayout.NORTH, contentPane, 1, SpringLayout.NORTH, gameGridPanel);
-		
-		layout.putConstraint(SpringLayout.WEST, contentPane, 3, SpringLayout.WEST, connectButton);
-		layout.putConstraint(SpringLayout.NORTH, gameGridPanel, 3,SpringLayout.NORTH, connectButton);
-		layout.putConstraint(SpringLayout.WEST, connectButton, 3, SpringLayout.WEST, newGameButton);
-		layout.putConstraint(SpringLayout.WEST, newGameButton, 3, SpringLayout.WEST, disconnectButton);
-		
-		layout.putConstraint(SpringLayout.WEST, contentPane,3,SpringLayout.WEST, messageLabel);
-		layout.putConstraint(SpringLayout.NORTH, connectButton, 5, SpringLayout.NORTH, messageLabel);
-		
-		/*JPanel pane = new JPanel();
-		JPanel pane1 = new JPanel();
-		JPanel pane2 = new JPanel();
-		JPanel pane3 = new JPanel();
-		pane1.add(gameGridPanel);
-		pane2.add(connectButton);
-		pane2.add(newGameButton);
-		pane2.add(disconnectButton);
-		pane3.add(messageLabel);*/
+		frame.add(gameGridPanel, BorderLayout.NORTH);
+		frame.add(connectButton, BorderLayout.WEST);
+		frame.add(newGameButton, BorderLayout.CENTER);
+		frame.add(disconnectButton, BorderLayout.EAST);
+		frame.add(messageLabel, BorderLayout.SOUTH);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane();
+		int xSize = gamegrid.getSize() * gameGridPanel.getUnitSize();
+		frame.setPreferredSize(new Dimension(xSize,400));
 		frame.pack();
 		frame.setLocation(100,100);
 		frame.setVisible(true);

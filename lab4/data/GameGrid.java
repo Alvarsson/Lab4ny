@@ -51,7 +51,7 @@ public class GameGrid extends Observable{
 	 * @return the grid size
 	 */
 	public int getSize(){
-		return size;
+		return this.size;
 	}
 	
 	/**
@@ -137,7 +137,7 @@ public class GameGrid extends Observable{
 		}
 		return false;
 	}
-	private boolean checkDiagonal(int player) { //Kolla efter diagonalt??
+	private boolean checkDiagonal(int player) { 
 		int cols = multiarray[0].length;
 		int rows = multiarray.length;
 		int count = 0;
