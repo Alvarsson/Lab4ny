@@ -68,31 +68,24 @@ public class GomokuGameState extends Observable implements Observer{
 	 * @param y the y coordinate
 	 */
 	public void move(int x, int y){
-		if(currentState == MY_TURN && gameGrid.move(x, y, GameGrid.ME)){ //Gˆr gameGrid.move(x, y, GameGrid.ME)
-																	     //ett drag om den sitter i en if-sats?
-
-			
-			gameGrid.move(x,y,GameGrid.ME);
-			if(gameGrid.isWinner(GameGrid.ME)){
-				currentState = FINISHED;
-				message = "You won!";
-				
-			}else{
-				client.sendMoveMessage(x, y);
-				currentState = OTHERS_TURN;
-				message = "Other player's turn.";				
-			}
-			setChanged();
-			notifyObservers();
-			
-			
-		}else{
+		if(currentState == MY_TURN) {
+			if(gameGrid.move(x, y, GameGrid.ME)) {
+				if(gameGrid.isWinner(GameGrid.ME)) {
+					currentState = FINISHED;
+					message = "You won!";
+				} else {
+					client.sendMoveMessage(x,y);
+					currentState = OTHERS_TURN;
+					message = "Others player's turn.";
+				}
+				setChanged();
+				notifyObservers();
+			}	
+		} else {
 			message = "Move could not be made.";
 			setChanged();
 			notifyObservers();
-				
 		}
-		
 	}
 	
 	/**

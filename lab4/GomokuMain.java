@@ -10,10 +10,15 @@ public class GomokuMain {
 		if( args.length != 1 || portNumber < 0) {//This should check if more arguments than one.
 			portNumber = 4000;
 		}
-			GomokuClient client = new GomokuClient(portNumber);
+		GomokuClient client = new GomokuClient(portNumber);
 		
 		GomokuGameState gameState = new GomokuGameState(client);
 		GomokuGUI gui = new GomokuGUI(gameState, client);
+		
+		
+		GomokuClient client2 = new GomokuClient(portNumber+1);
+		GomokuGameState gameState2 = new GomokuGameState(client2);
+		GomokuGUI gui2 = new GomokuGUI(gameState2, client2);
 	
 	}
 }

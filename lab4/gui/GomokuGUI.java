@@ -51,7 +51,7 @@ public class GomokuGUI implements Observer{
 		gamegrid = gamestate.getGameGrid();
 		
 		JFrame frame = new JFrame("fishdix");
-		GamePanel gameGridPanel = new GamePanel(this.gamestate.getGameGrid());
+		gameGridPanel = new GamePanel(this.gamestate.getGameGrid());
 		gameGridPanel.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				int tempArray[] = gameGridPanel.getGridPosition(e.getX(), e.getY());
@@ -60,21 +60,21 @@ public class GomokuGUI implements Observer{
 			}
 		});
 		
-		JLabel messageLabel = new JLabel("Welcome To Gomoku");
-		JButton connectButton = new JButton("Connect");
+		messageLabel = new JLabel("Welcome To Gomoku");
+		connectButton = new JButton("Connect");
 		connectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ConnectionWindow connected = new ConnectionWindow(client);
 			}
 			
 		});
-		JButton newGameButton = new JButton("New Game");
+		newGameButton = new JButton("New Game");
 		newGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				gamestate.newGame();
 			}
 		});
-		JButton disconnectButton = new JButton("Disconnect");
+		disconnectButton = new JButton("Disconnect");
 		disconnectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				gamestate.disconnect();
