@@ -10,7 +10,10 @@ import lab4.client.GomokuClient;
 
 
 /**
- * Represents the state of a game
+ * This class represents the game state,
+ * a dynamic object of this class keeps track
+ * of what state the board currently is in and 
+ * updates it whenever anything happens.
  */
 
 public class GomokuGameState extends Observable implements Observer{
@@ -30,9 +33,10 @@ public class GomokuGameState extends Observable implements Observer{
 	private String message;
 	
 	/**
-	 * The constructor
-	 * 
-	 * @param gc The client used to communicate with the other player
+	 * The constructor takes the client as a paremeter
+	 * so that it can connect and communicate with it.
+	 * It then states that initially there is no game going on
+	 * and then it creates the board.
 	 */
 	public GomokuGameState(GomokuClient gc){
 		client = gc;
@@ -44,28 +48,24 @@ public class GomokuGameState extends Observable implements Observer{
 	
 
 	/**
-	 * Returns the message string
-	 * 
-	 * @return the message string
+	 * This method returns the string message visible at
+	 * the bottom of the game.
 	 */
 	public String getMessageString(){
 		return message;
 	}
 	
 	/**
-	 * Returns the game grid
-	 * 
-	 * @return the game grid
+	 * This method returns the game grid.
 	 */
 	public GameGrid getGameGrid(){
 		return gameGrid;
 	}
 
 	/**
-	 * This player makes a move at a specified location
-	 * 
-	 * @param x the x coordinate
-	 * @param y the y coordinate
+	 * This method attempts to make a move to a certain box.
+	 * If it is "my" turn and the box the player wants to move to is empty
+	 * the player will get control over that box.
 	 */
 	public void move(int x, int y){
 		if(currentState == MY_TURN) {
@@ -96,7 +96,8 @@ public class GomokuGameState extends Observable implements Observer{
 	}
 	
 	/**
-	 * Starts a new game with the current client
+	 * This method creates a new game by clearing the board and
+	 * telling the other player it's their turn.
 	 */
 	public void newGame(){
 		gameGrid.clearGrid();
@@ -108,8 +109,8 @@ public class GomokuGameState extends Observable implements Observer{
 	}
 	
 	/**
-	 * Other player has requested a new game, so the 
-	 * game state is changed accordingly
+	 * This method is called when the other player starts a game.
+	 * The method will clear the board and it will be "my" turn.
 	 */
 	public void receivedNewGame(){
 		gameGrid.clearGrid();
@@ -121,8 +122,9 @@ public class GomokuGameState extends Observable implements Observer{
 	}
 	
 	/**
-	 * The connection to the other player is lost, 
-	 * so the game is interrupted
+	 * This method is called when the other player
+	 * disconnects. It will stop the game, clear the board
+	 * and inform "me" that the other player left.
 	 */
 	public void otherGuyLeft(){
 		
@@ -134,7 +136,9 @@ public class GomokuGameState extends Observable implements Observer{
 	}
 	
 	/**
-	 * The player disconnects from the client
+	 * This method is called when "me" disconnects. It will
+	 * stop the game, clear the board and inform "me" that 
+	 * "me" was disconnected.
 	 */
 	public void disconnect(){
 		gameGrid.clearGrid();
@@ -146,10 +150,10 @@ public class GomokuGameState extends Observable implements Observer{
 	}
 	
 	/**
-	 * The player receives a move from the other player
-	 * 
-	 * @param x The x coordinate of the move
-	 * @param y The y coordinate of the move
+	 * This method is called when the other player makes a move.
+	 * The method will check if the move was legit and then check
+	 * if the other player won the game with that move. If he did the
+	 * game ends, otherwise it's "my" turn.
 	 */
 	public void receivedMove(int x, int y){
 		if(currentState == OTHER_TURN) {
@@ -170,7 +174,9 @@ public class GomokuGameState extends Observable implements Observer{
 		setChanged();
 		notifyObservers();
 	}
-	
+	/**
+	 * This method is called to determine the initial game state when a game starts.
+	 */
 	public void update(Observable o, Object arg) {
 		
 		switch(client.getConnectionStatus()){
