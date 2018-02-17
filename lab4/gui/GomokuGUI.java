@@ -21,7 +21,10 @@ import lab4.data.GomokuGameState;
 
 
 /*
- * The GUI class
+ * This class represents the interaction with the game.
+ * It creates the buttons, allows the players to press 
+ * the boxes to gain control over them and it displays and 
+ * updates the message at the bottom of the screen.
  */
 
 public class GomokuGUI implements Observer{
@@ -36,10 +39,12 @@ public class GomokuGUI implements Observer{
 	private JButton disconnectButton;
 	
 	/**
-	 * The constructor
-	 * 
-	 * @param g   The game state that the GUI will visualize
-	 * @param c   The client that is responsible for the communication
+	 * The constructor takes the game state and the client
+	 * as parameters and connects to them. It then creates the 
+	 * game window, adds the ability to click the board to make a move, 
+	 * adds the buttons that do things when you click them, designs where 
+	 * the graphics should be and then decides the size and location of the 
+	 * game window. 
 	 */
 	public GomokuGUI(GomokuGameState g, GomokuClient c){
 		
@@ -95,7 +100,10 @@ public class GomokuGUI implements Observer{
 		frame.setVisible(true);
 		
 	}
-	
+	/** 
+	 * This method updates if the buttons are active or not and 
+	 * it also updates the message shown at the bottom of the screen.
+	 */
 	public void update(Observable arg0, Object arg1) {
 		
 		// Update the buttons if the connection status has changed
