@@ -2,11 +2,18 @@
 import lab4.client.*;
 import lab4.data.*;
 import lab4.gui.*;
-
+/**
+*
+* This class simply works as a main function,
+* it makes sure we have a port number and then
+* it creates the dynamic objects of the different classes
+* necessary for the program to run.
+*
+*/
 public class GomokuMain {
 	public static void main(String[] args) {
 		
-		int portNumber = Integer.parseInt(args[0]);
+		int portNumber = Integer.parseInt(args[0]);//First argument becomes portNumber
 		if( args.length != 1 || portNumber < 0) {//This should check if more arguments than one.
 			portNumber = 4000;
 		}
