@@ -8,8 +8,8 @@ import java.util.Observable;
  */
 
 public class GameGrid extends Observable{
-	public static final int ME = 2;
-	public static final int OTHER = 1; 
+	public static final int ME = 1;
+	public static final int OTHER = 2; 
 	public static final int EMPTY = 0;
 	private int size;
 	public int [][] multiarray;
@@ -91,16 +91,10 @@ public class GameGrid extends Observable{
 	 * @return true if player has 5 in row, false otherwise
 	 */
 	public boolean isWinner(int player){
-		/*if(checkHorizontal(player) != true 
-				|| checkVertical(player) != true 
-				|| checkDiagonal(player) != true) {
-			return false;
-		} 
-		return true;*/
 		return checkHorizontal(player) || checkVertical(player) || checkDiagonal(player);
 		
 	}
-	private boolean checkHorizontal(int player) { //DENNA KOLLAR ÖVER GRÄNSERNA??
+	private boolean checkHorizontal(int player) { 
 		int rows = multiarray.length;
 		int cols = multiarray[0].length;
 		int count = 0;
@@ -148,24 +142,29 @@ public class GameGrid extends Observable{
 				if(multiarray[x][y] == player) {
 					dCountX = x;
 					dCountY = y;
-					count = 1;
-					while(multiarray[dCountX+1][dCountY+1] == player && dCountX+INROW <= size && dCountY+INROW <= size) {
+					while(multiarray[dCountX][dCountY] == player && x+INROW <= size && y+INROW <= size) {
 						dCountX++;
 						dCountY++;
 						count++;
+						if(INROW <= count) {
+							System.out.println("printout: " +count );
+							return true;
+						}
 					}
 					dCountX = x;
 					dCountY = y;
-					count = 1;
-					while(multiarray[dCountX+1][dCountY+1] == player && dCountX-INROW <= size && dCountY-INROW <= size) {
-						dCountX++;
-						dCountY--;
+					count = 0;
+					while(multiarray[dCountX][dCountY] == player && x-INROW >= -1 && y+INROW <= size) {
+						dCountX--;
+						dCountY++;
 						count++;
-					}	
+						if(INROW <= count) {
+							return true;
+						}
+					}
+					count = 0;
 				}
-				if(INROW <= count) {
-					return true;
-				}
+				
 			}
 		}
 		return false;

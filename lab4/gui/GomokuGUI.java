@@ -30,10 +30,10 @@ public class GomokuGUI implements Observer{
 	private GomokuGameState gamestate;
 	private GamePanel gameGridPanel;
 	private GameGrid gamegrid;
-	private static JLabel messageLabel;
-	private static JButton connectButton;
-	private static JButton newGameButton;
-	private static JButton disconnectButton;
+	private	JLabel messageLabel;
+	private JButton connectButton;
+	private JButton newGameButton;
+	private JButton disconnectButton;
 	
 	/**
 	 * The constructor
