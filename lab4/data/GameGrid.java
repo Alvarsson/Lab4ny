@@ -33,9 +33,7 @@ public class GameGrid extends Observable{
 				multiarray[x][y] = EMPTY;
 			}
 		}
-	}
-		
-		
+	}	
 	/**
 	 * Reads a location of the grid
 	 * 

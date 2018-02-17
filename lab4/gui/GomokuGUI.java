@@ -27,6 +27,7 @@ public class GomokuGUI implements Observer{
 	private GomokuClient client;
 	private GomokuGameState gamestate;
 	private static GamePanel gameGridPanel;
+	private GameGrid gamegrid;
 	private static JLabel messageLabel;
 	private static JButton connectButton;
 	private static JButton newGameButton;
@@ -51,6 +52,8 @@ public class GomokuGUI implements Observer{
 		GamePanel gameGridPanel = new GamePanel(this.gamestate.getGameGrid());
 		gameGridPanel.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				int tempArray[] = gameGridPanel.getGridPosition(e.getX(), e.getY());
+				gamestate.move(tempArray[0], tempArray[1]);
 				
 			}
 		});
