@@ -23,7 +23,7 @@ public class GomokuGameState extends Observable implements Observer{
     //Possible game states
 	private final int NOT_STARTED = 0;
 	private final int MY_TURN = 1;
-	private final int OTHERS_TURN = 2;
+	private final int OTHER_TURN = 2;
 	private final int FINISHED = 3;
 	
 	private int currentState;	
@@ -75,17 +75,18 @@ public class GomokuGameState extends Observable implements Observer{
 					message = "You won!";
 				} else {
 					client.sendMoveMessage(x,y);
-					currentState = OTHERS_TURN;
+					currentState = OTHER_TURN;
 					message = "Others player's turn.";
+					System.out.println("hej");
 				}
 				setChanged();
 				notifyObservers();
-			}	
-		} else {
+			} else {
 			message = "Move could not be made.";
 			setChanged();
 			notifyObservers();
-		}
+			}
+		} 	
 	}
 	
 	/**
@@ -93,11 +94,10 @@ public class GomokuGameState extends Observable implements Observer{
 	 */
 	public void newGame(){
 		gameGrid.clearGrid();
-		currentState = OTHERS_TURN;
+		currentState = OTHER_TURN;
 		message = "You started a new game, other player's turn.";
 		setChanged();
 		notifyObservers();
-		
 	}
 	
 	/**
@@ -168,7 +168,7 @@ public class GomokuGameState extends Observable implements Observer{
 			break;
 		case GomokuClient.SERVER:
 			message = "Game started, waiting for other player...";
-			currentState = OTHERS_TURN;
+			currentState = OTHER_TURN;
 			break;
 		}
 		setChanged();

@@ -11,7 +11,6 @@ public class GomokuMain {
 			portNumber = 4000;
 		}
 		GomokuClient client = new GomokuClient(portNumber);
-		
 		GomokuGameState gameState = new GomokuGameState(client);
 		GomokuGUI gui = new GomokuGUI(gameState, client);
 		

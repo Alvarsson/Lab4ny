@@ -91,12 +91,13 @@ public class GameGrid extends Observable{
 	 * @return true if player has 5 in row, false otherwise
 	 */
 	public boolean isWinner(int player){
-		if(checkHorizontal(player) != true 
+		/*if(checkHorizontal(player) != true 
 				|| checkVertical(player) != true 
 				|| checkDiagonal(player) != true) {
 			return false;
 		} 
-		return true;
+		return true;*/
+		return checkHorizontal(player) || checkVertical(player) || checkDiagonal(player);
 		
 	}
 	private boolean checkHorizontal(int player) { //DENNA KOLLAR ÖVER GRÄNSERNA??
@@ -108,7 +109,7 @@ public class GameGrid extends Observable{
 				if(multiarray[x][y] == player) {
 					count++;
 				}
-				if(multiarray[x][y] == EMPTY) {
+				if(multiarray[x][y] != player) {
 					count = 0;
 				}
 				if(INROW == count) {
@@ -127,7 +128,7 @@ public class GameGrid extends Observable{
 				if(multiarray[x][y] == player) {
 					count++;
 				} 
-				if(multiarray[x][y] == EMPTY) {
+				if(multiarray[x][y] != player) {
 					count = 0;
 				}
 				if(INROW == count) {
@@ -143,12 +144,12 @@ public class GameGrid extends Observable{
 		int count = 0;
 		int dCountX, dCountY;
 		for(int x = 0; x < rows; x++) {
-			for(int y = 0; x < cols; y++) {
+			for(int y = 0; y < cols; y++) {
 				if(multiarray[x][y] == player) {
 					dCountX = x;
 					dCountY = y;
 					count = 1;
-					while(multiarray[dCountX+1][dCountY+1] == player) {
+					while(multiarray[dCountX+1][dCountY+1] == player && dCountX+INROW <= size && dCountY+INROW <= size) {
 						dCountX++;
 						dCountY++;
 						count++;
@@ -156,7 +157,7 @@ public class GameGrid extends Observable{
 					dCountX = x;
 					dCountY = y;
 					count = 1;
-					while(multiarray[dCountX+1][dCountY+1] == player) {
+					while(multiarray[dCountX+1][dCountY+1] == player && dCountX-INROW <= size && dCountY-INROW <= size) {
 						dCountX++;
 						dCountY--;
 						count++;
