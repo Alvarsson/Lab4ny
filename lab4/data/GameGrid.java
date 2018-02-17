@@ -100,9 +100,9 @@ public class GameGrid extends Observable{
 	}
 	/**
 	 * This method is a private help function that checks if
-	 * the player has enough boxes horizontally in a row to win the game.
+	 * the player has enough boxes vertically in a row to win the game.
 	 */
-	private boolean checkHorizontal(int player) { 
+	private boolean checkVertical(int player) { 
 		int rows = multiarray.length;
 		int cols = multiarray[0].length;
 		int count = 0;
@@ -123,9 +123,9 @@ public class GameGrid extends Observable{
 	}
 	/**
 	 * This method is a private help function that checks if
-	 * the player has enough boxes vertically in a row to win the game.
+	 * the player has enough boxes horizontally in a row to win the game.
 	 */
-	private boolean checkVertical(int player) {
+	private boolean checkHorizontal(int player) {
 		int cols = multiarray[0].length;
 		int rows = multiarray.length;
 		int count = 0;
