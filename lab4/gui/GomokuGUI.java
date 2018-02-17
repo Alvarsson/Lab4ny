@@ -60,7 +60,6 @@ public class GomokuGUI implements Observer{
 		connectButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ConnectionWindow connected = new ConnectionWindow(client);
-				
 			}
 			
 		});
@@ -86,6 +85,7 @@ public class GomokuGUI implements Observer{
 		contentPane.add(newGameButton);
 		contentPane.add(disconnectButton);
 		contentPane.add(gameGridPanel);
+		//INGEN ANING OM DETTA BLIR KORREKT
 		
 		layout.putConstraint(SpringLayout.WEST, contentPane, 1, SpringLayout.WEST, gameGridPanel);
 		layout.putConstraint(SpringLayout.NORTH, contentPane, 1, SpringLayout.NORTH, gameGridPanel);
