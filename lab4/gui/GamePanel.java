@@ -11,7 +11,9 @@ import javax.swing.JPanel;
 import lab4.data.GameGrid;
 
 /**
- * A panel providing a graphical view of the game board
+ * This class provides a graphical view of the game board.
+ * A dynamic object of this class is used to draw the
+ * graphics of the game.
  */
 
 public class GamePanel extends JPanel implements Observer{
@@ -20,9 +22,10 @@ public class GamePanel extends JPanel implements Observer{
 	private GameGrid grid;
 	
 	/**
-	 * The constructor
-	 * 
-	 * @param grid The grid that is to be displayed
+	 * The constructor takes a grid as a parameter so that
+	 * it can connect with it. It then creates a starting size
+	 * of the game window and sets the background color of the game
+	 * to white.
 	 */
 	public GamePanel(GameGrid grid){
 		this.grid = grid;
@@ -34,12 +37,8 @@ public class GamePanel extends JPanel implements Observer{
 	}
 
 	/**
-	 * Returns a grid position given pixel coordinates
-	 * of the panel
-	 * 
-	 * @param x the x coordinates
-	 * @param y the y coordinates
-	 * @return an integer array containing the [x, y] grid position
+	 * This method returns what position of the grid a box is in
+	 * given the pixel position of the box.
 	 */
 	public int[] getGridPosition(int x, int y){
 		x = x/UNIT_SIZE;
@@ -47,11 +46,17 @@ public class GamePanel extends JPanel implements Observer{
 		int [] coordinates = {x,y};
 		return coordinates;
 	}
-	
+	/**
+	 *This method updates to show graphics we add during the game.
+	 */
 	public void update(Observable arg0, Object arg1) {
 		this.repaint();
 	}
-	
+	/**
+	 * This method paints the borders of the boxes when we start the game
+	 * and then fills the boxes controlled by "me" with circles
+	 * and boxes controlled by "other" with crosses.
+	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		g.setColor(Color.black);
@@ -72,6 +77,9 @@ public class GamePanel extends JPanel implements Observer{
 		}
 		
 	}
+	/**
+	 * This method returns the scale we use when we draw the game.
+	 */
 	public int getUnitSize() {
 		return UNIT_SIZE;
 	}
