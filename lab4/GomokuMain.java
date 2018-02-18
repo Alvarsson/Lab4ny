@@ -13,6 +13,7 @@ import lab4.gui.*;
 public class GomokuMain {
 	public static void main(String[] args) {
 		
+		
 		int portNumber = Integer.parseInt(args[0]);//First argument becomes portNumber
 		if( args.length != 1 || portNumber < 0) {//This should check if more arguments than one.
 			portNumber = 4000;

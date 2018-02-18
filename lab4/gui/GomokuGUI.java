@@ -54,11 +54,11 @@ public class GomokuGUI implements Observer{
 		gamestate.addObserver(this);
 		gamegrid = gamestate.getGameGrid();
 		
-		JFrame frame = new JFrame("fishdix");
+		JFrame frame = new JFrame("GameON");
 		gameGridPanel = new GamePanel(this.gamestate.getGameGrid());
-		gameGridPanel.addMouseListener(new MouseAdapter() {
+		gameGridPanel.addMouseListener(new MouseAdapter() {// skapar lyssnare för musklick
 			public void mouseClicked(MouseEvent e) {
-				int tempArray[] = gameGridPanel.getGridPosition(e.getX(), e.getY());
+				int tempArray[] = gameGridPanel.getGridPosition(e.getX(), e.getY());// skappar temporär array för koordiaterna som musen klickat på
 				gamestate.move(tempArray[0], tempArray[1]);
 				
 			}
@@ -66,7 +66,7 @@ public class GomokuGUI implements Observer{
 		
 		messageLabel = new JLabel("Welcome To Gomoku");
 		connectButton = new JButton("Connect");
-		connectButton.addActionListener(new ActionListener() {
+		connectButton.addActionListener(new ActionListener() { 
 			public void actionPerformed(ActionEvent arg0) {
 				ConnectionWindow connected = new ConnectionWindow(client);
 			}
@@ -84,7 +84,7 @@ public class GomokuGUI implements Observer{
 				gamestate.disconnect();
 			}
 		});
-		frame.add(gameGridPanel, BorderLayout.NORTH);
+		frame.add(gameGridPanel, BorderLayout.NORTH);// skapar layout för programmet
 		frame.add(connectButton, BorderLayout.WEST);
 		frame.add(newGameButton, BorderLayout.CENTER);
 		frame.add(disconnectButton, BorderLayout.EAST);
@@ -92,7 +92,7 @@ public class GomokuGUI implements Observer{
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane();
-		int xSize = gamegrid.getSize() * gameGridPanel.getUnitSize();
+		int xSize = gamegrid.getSize() * gameGridPanel.getUnitSize();//storlek på rutan till griden's egna storlek.
 		frame.setPreferredSize(new Dimension(xSize,400));
 		frame.pack();
 		frame.setLocation(100,100);

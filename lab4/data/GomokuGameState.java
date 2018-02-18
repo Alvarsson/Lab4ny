@@ -38,7 +38,7 @@ public class GomokuGameState extends Observable implements Observer{
 	 * It then states that initially there is no game going on
 	 * and then it creates the board.
 	 */
-	public GomokuGameState(GomokuClient gc){
+	public GomokuGameState(GomokuClient gc){ //init
 		client = gc;
 		client.addObserver(this);
 		gc.setGameState(this);
@@ -51,14 +51,14 @@ public class GomokuGameState extends Observable implements Observer{
 	 * This method returns the string message visible at
 	 * the bottom of the game.
 	 */
-	public String getMessageString(){
+	public String getMessageString(){ //meddelandet för student returneras
 		return message;
 	}
 	
 	/**
 	 * This method returns the game grid.
 	 */
-	public GameGrid getGameGrid(){
+	public GameGrid getGameGrid(){//return object av gamegrid
 		return gameGrid;
 	}
 
@@ -67,7 +67,7 @@ public class GomokuGameState extends Observable implements Observer{
 	 * If it is "my" turn and the box the player wants to move to is empty
 	 * the player will get control over that box.
 	 */
-	public void move(int x, int y){
+	public void move(int x, int y){// movefunktion för vad som sker ifall spelarens tur
 		if(currentState == MY_TURN) {
 			if(gameGrid.move(x, y, GameGrid.ME)) {
 				if(gameGrid.isWinner(GameGrid.ME)) {
@@ -99,7 +99,7 @@ public class GomokuGameState extends Observable implements Observer{
 	 * This method creates a new game by clearing the board and
 	 * telling the other player it's their turn.
 	 */
-	public void newGame(){
+	public void newGame(){// Vad som ska ske i currentstate vid newgame
 		gameGrid.clearGrid();
 		currentState = OTHER_TURN;
 		message = "You started a new game, other player's turn.";
@@ -112,7 +112,7 @@ public class GomokuGameState extends Observable implements Observer{
 	 * This method is called when the other player starts a game.
 	 * The method will clear the board and it will be "my" turn.
 	 */
-	public void receivedNewGame(){
+	public void receivedNewGame(){ // Vad som sker vid recieved när new game kallas.
 		gameGrid.clearGrid();
 		currentState = MY_TURN;
 		message = "Other player started new game, your turn.";
@@ -126,7 +126,7 @@ public class GomokuGameState extends Observable implements Observer{
 	 * disconnects. It will stop the game, clear the board
 	 * and inform "me" that the other player left.
 	 */
-	public void otherGuyLeft(){
+	public void otherGuyLeft(){ // Om en lämnar
 		
 		gameGrid.clearGrid();
 		currentState = NOT_STARTED;
@@ -140,7 +140,7 @@ public class GomokuGameState extends Observable implements Observer{
 	 * stop the game, clear the board and inform "me" that 
 	 * "me" was disconnected.
 	 */
-	public void disconnect(){
+	public void disconnect(){ // vid disconnect
 		gameGrid.clearGrid();
 		currentState = NOT_STARTED;
 		message = "You disconnected.";
@@ -155,7 +155,7 @@ public class GomokuGameState extends Observable implements Observer{
 	 * if the other player won the game with that move. If he did the
 	 * game ends, otherwise it's "my" turn.
 	 */
-	public void receivedMove(int x, int y){
+	public void receivedMove(int x, int y){// när Other gjort ett drag.
 		if(currentState == OTHER_TURN) {
 			if(gameGrid.move(x, y, GameGrid.OTHER)) {
 				if(gameGrid.isWinner(GameGrid.OTHER)) {

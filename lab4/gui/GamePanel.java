@@ -18,7 +18,7 @@ import lab4.data.GameGrid;
 
 public class GamePanel extends JPanel implements Observer{
 
-	private final int UNIT_SIZE = 20;
+	private final int UNIT_SIZE = 20; // storlek på rutor.
 	private GameGrid grid;
 	
 	/**
@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements Observer{
 	 * of the game window and sets the background color of the game
 	 * to white.
 	 */
-	public GamePanel(GameGrid grid){
+	public GamePanel(GameGrid grid){//init 
 		this.grid = grid;
 		grid.addObserver(this);
 		Dimension d = new Dimension(grid.getSize()*UNIT_SIZE+1, grid.getSize()*UNIT_SIZE+1);
@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Observer{
 	 * This method returns what position of the grid a box is in
 	 * given the pixel position of the box.
 	 */
-	public int[] getGridPosition(int x, int y){
+	public int[] getGridPosition(int x, int y){ 
 		x = x/UNIT_SIZE;
 		y = y/UNIT_SIZE;
 		int [] coordinates = {x,y};
@@ -57,7 +57,7 @@ public class GamePanel extends JPanel implements Observer{
 	 * and then fills the boxes controlled by "me" with circles
 	 * and boxes controlled by "other" with crosses.
 	 */
-	public void paintComponent(Graphics g){
+	public void paintComponent(Graphics g){ // målar ut grid och sen other och me representationerna på gridden.
 		super.paintComponent(g);
 		g.setColor(Color.black);
 		for(int x = 0; x < grid.getSize(); x++) {

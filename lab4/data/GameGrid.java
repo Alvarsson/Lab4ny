@@ -23,7 +23,7 @@ public class GameGrid extends Observable{
 	 * that is taken as a parameter for the dynamic object.
 	 */
 	
-	public GameGrid(int size){
+	public GameGrid(int size){ //init för gamegrid
 		this.size = size;
 		multiarray = new int[size][size];
 		startArray();
@@ -35,7 +35,7 @@ public class GameGrid extends Observable{
 	 * that no player controls that box.
 	 */
 	
-	private void startArray() {
+	private void startArray() {// nollställer brädet
 		for(int x = 0; x < multiarray.length; x++) {
 			for(int y = 0; y < multiarray.length; y++) {
 				multiarray[x][y] = EMPTY;
@@ -48,7 +48,7 @@ public class GameGrid extends Observable{
 	 * in other words it checks whether a box at position (x,y) 
 	 * is controlled by "me", "other" or if it's empty.
 	 */
-	public int getLocation(int x, int y){
+	public int getLocation(int x, int y){// ger koordinater i "matrix" 2dim arrayen
 		return multiarray[x][y];
 	}
 		
@@ -67,7 +67,7 @@ public class GameGrid extends Observable{
 	 * the method just returns false to say that the move was not
 	 * possible.
 	 */
-	public boolean move(int x, int y, int player){
+	public boolean move(int x, int y, int player){ // om tom, return true, annars false.
 		if(multiarray[x][y] == EMPTY) {
 			multiarray[x][y] = player;
 			setChanged();
@@ -83,7 +83,7 @@ public class GameGrid extends Observable{
 	 * This method calls the function startArray() which creates
 	 * the board with only empty boxes, which means that it clears the board.
 	 */
-	public void clearGrid(){
+	public void clearGrid(){ // rensar grid
 		startArray();
 		setChanged();
 		notifyObservers();
@@ -94,7 +94,7 @@ public class GameGrid extends Observable{
 	 * This method returns true if any of the winning conditions are met,
 	 * the winning conditions are checked in help functions.
 	 */
-	public boolean isWinner(int player){
+	public boolean isWinner(int player){ //använder hjälpmetoder i klassen för att strukturera upp
 		return checkHorizontal(player) || checkVertical(player) || checkDiagonal(player);
 		
 	}
@@ -102,7 +102,7 @@ public class GameGrid extends Observable{
 	 * This method is a private help function that checks if
 	 * the player has enough boxes vertically in a row to win the game.
 	 */
-	private boolean checkVertical(int player) { 
+	private boolean checkVertical(int player) { //kollar vertikala genom att iterera genom brädet
 		int rows = multiarray.length;
 		int cols = multiarray[0].length;
 		int count = 0;
@@ -125,7 +125,7 @@ public class GameGrid extends Observable{
 	 * This method is a private help function that checks if
 	 * the player has enough boxes horizontally in a row to win the game.
 	 */
-	private boolean checkHorizontal(int player) {
+	private boolean checkHorizontal(int player) {//kollar horizontella genom att iterera genom brädet
 		int cols = multiarray[0].length;
 		int rows = multiarray.length;
 		int count = 0;
@@ -148,7 +148,7 @@ public class GameGrid extends Observable{
 	 * This method is a private help function that checks if
 	 * the player has enough boxes diagonally in a row to win the game.
 	 */
-	private boolean checkDiagonal(int player) { 
+	private boolean checkDiagonal(int player) { //kollar diagonala med whileloopar
 		int cols = multiarray[0].length;
 		int rows = multiarray.length;
 		int count = 0;
@@ -158,7 +158,7 @@ public class GameGrid extends Observable{
 				if(multiarray[x][y] == player) {
 					dCountX = x;
 					dCountY = y;
-					while(multiarray[dCountX][dCountY] == player && x+INROW <= size && y+INROW <= size) {
+					while(multiarray[dCountX][dCountY] == player && x+INROW <= size && y+INROW <= size) { // kollar nedåt HÖGER 
 						dCountX++;
 						dCountY++;
 						count++;
@@ -170,7 +170,7 @@ public class GameGrid extends Observable{
 					dCountX = x;
 					dCountY = y;
 					count = 0;
-					while(multiarray[dCountX][dCountY] == player && x-INROW >= -1 && y+INROW <= size) {
+					while(multiarray[dCountX][dCountY] == player && x-INROW >= -1 && y+INROW <= size) { // kollar nedåt VÄNSTER
 						dCountX--;
 						dCountY++;
 						count++;
