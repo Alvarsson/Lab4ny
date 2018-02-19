@@ -14,9 +14,15 @@ public class GomokuMain {
 	public static void main(String[] args) {
 		
 		
-		int portNumber = Integer.parseInt(args[0]);//First argument becomes portNumber
+		final int standardPortNumber = 4000;
+		int portNumber;
+		try {
+			portNumber = Integer.parseInt(args[0]);//First argument becomes portNumber
+		}catch(Exception e) {
+			portNumber = standardPortNumber;
+		}
 		if( args.length != 1 || portNumber < 0) {//This should check if more arguments than one.
-			portNumber = 4000;
+			portNumber = standardPortNumber;
 		}
 		GomokuClient client = new GomokuClient(portNumber);
 		GomokuGameState gameState = new GomokuGameState(client);
