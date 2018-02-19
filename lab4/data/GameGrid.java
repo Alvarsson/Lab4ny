@@ -124,6 +124,7 @@ public class GameGrid extends Observable{
 	/**
 	 * This method is a private help function that checks if
 	 * the player has enough boxes horizontally in a row to win the game.
+	 * 
 	 */
 	private boolean checkHorizontal(int player) {//kollar horizontella genom att iterera genom brädet
 		int cols = multiarray[0].length;
@@ -163,7 +164,6 @@ public class GameGrid extends Observable{
 						dCountY++;
 						count++;
 						if(INROW <= count) {
-							System.out.println("printout: " +count );
 							return true;
 						}
 					}
